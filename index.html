@@ -23,23 +23,31 @@
             min-height: 100vh;
         }
 
-        .black-top {
-            background: #000000;
+        .top {
+            background: linear-gradient(
+                to bottom,
+                #808080 0,
+                #808080 17.5%,
+                #000000 17.5%,
+                #000000 100%
+            );
         }
 
         .white {
             background: #ffffff;
         }
 
-        .black-bottom {
+        .bottom {
             background: #000000;
         }
     </style>
 </head>
 
 <body>
-    <div class="black-top"></div>
+
+    <div class="top"></div>
     <div class="white"></div>
-    <div class="black-bottom"></div>
+    <div class="bottom"></div>
+
 </body>
 </html>
