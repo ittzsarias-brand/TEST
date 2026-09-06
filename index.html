@@ -1,58 +1,1401 @@
 <!DOCTYPE html>
-<html lang="ckb" dir="rtl">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>PH.Tools</title>
+
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html,
         body {
             width: 100%;
-            height: 100%;
+            min-height: 100%;
         }
 
         body {
+            background: #f5f5f5;
+            color: #111;
+            font-family:
+                "Noto Sans Arabic",
+                "Noto Sans",
+                Tahoma,
+                Arial,
+                sans-serif;
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .mobile-page {
+            width: 100%;
+            max-width: 480px;
             min-height: 100vh;
+            margin: auto;
+            background: #fff;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .topbar {
+            height: 72px;
+            background: #101010;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            direction: ltr;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            width: 82px;
+            height: 62px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            direction: rtl;
+        }
+
+        .header-action {
+            position: relative;
+            width: 48px;
+            height: 58px;
+            border: 0;
+            background: transparent;
+            color: #fff;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            gap: 2px;
+            cursor: pointer;
+        }
+
+        .header-action svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .header-action span {
+            font-size: 10px;
+            line-height: 14px;
+            white-space: nowrap;
+            color: #eee;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 7px;
+            right: 5px;
+
+            min-width: 17px;
+            height: 17px;
+
+            padding: 0 4px;
+            border-radius: 50%;
+
+            background: #ed1c24;
+            color: white;
+
+            font: 700 10px/17px Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .mobile-nav {
+            height: 48px;
+            background: #080808;
+
+            display: flex;
+            align-items: center;
+
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            direction: rtl;
+
+            border-bottom: 1px solid #2d2d2d;
+        }
+
+        .mobile-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+
+            height: 48px;
+            padding: 0 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            color: #eee;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .nav-item.active {
+            background: #ed1c24;
+            color: #fff;
+        }
+
+        .nav-item svg {
+            width: 17px;
+            height: 17px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            width: 100%;
+            position: relative;
+
+            background: #111;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-button {
+            position: absolute;
+
+            left: 50%;
+            bottom: 10.2%;
+
+            transform: translateX(-50%);
+
+            width: 31%;
+            min-width: 118px;
+            max-width: 155px;
+
+            height: 34px;
+
+            border: 0;
+            border-radius: 4px;
+
+            background: #ed1c24;
+            color: #fff;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, .25);
+        }
+
+        /* =========================
+           BENEFITS
+        ========================= */
+
+        .benefits {
+            background: #111;
+            color: #fff;
+
             display: grid;
-            grid-template-rows: 0.35fr 1.65fr 2fr 0.5fr;
+            grid-template-columns: repeat(2, 1fr);
+
+            direction: rtl;
         }
 
-        .top-black {
-            background: #000000;
+        .benefit {
+            min-height: 75px;
+
+            padding: 10px 8px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            border-bottom: 1px solid #444;
         }
 
-        .picture {
-            background-image: url("IMG_9500.jpeg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        .benefit:nth-child(odd) {
+            border-left: 1px solid #444;
         }
 
-        .white {
-            background: #ffffff;
+        .benefit-icon {
+            flex: 0 0 40px;
+
+            width: 40px;
+            height: 40px;
+
+            border: 2px solid #ed1c24;
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
         }
 
-        .bottom-black {
-            background: #000000;
+        .benefit-icon svg {
+            width: 23px;
+            height: 23px;
+
+            fill: none;
+            stroke: #fff;
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .benefit strong {
+            display: block;
+
+            font-size: 11px;
+            line-height: 17px;
+
+            white-space: nowrap;
+        }
+
+        .benefit small {
+            display: block;
+
+            color: #cfcfcf;
+
+            font-size: 9px;
+            line-height: 14px;
+
+            white-space: nowrap;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            padding: 18px 12px 8px;
+            background: #fff;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+
+            font-size: 17px;
+            font-weight: 800;
+
+            position: relative;
+
+            padding-bottom: 7px;
+        }
+
+        .section-heading h2::after {
+            content: "";
+
+            position: absolute;
+
+            right: 0;
+            bottom: 0;
+
+            width: 42px;
+            height: 3px;
+
+            background: #ed1c24;
+        }
+
+        .section-heading a {
+            color: #ed1c24;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           CATEGORY
+        ========================= */
+
+        .categories {
+            display: flex;
+
+            gap: 8px;
+
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            direction: rtl;
+
+            padding-bottom: 5px;
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category {
+            flex: 0 0 112px;
+
+            border: 1px solid #e4e4e4;
+
+            background: #fafafa;
+
+            border-radius: 2px;
+
+            overflow: hidden;
+
+            text-align: center;
+        }
+
+        .category-image {
+            width: 100%;
+            height: 86px;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 36px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ddd,
+                    #fafafa
+                );
+        }
+
+        .category strong {
+            display: block;
+
+            padding: 6px 4px 0;
+
+            font-size: 11px;
+        }
+
+        .category small {
+            display: block;
+
+            padding: 1px 4px 9px;
+
+            font-size: 8px;
+
+            color: #777;
+        }
+
+        /* =========================
+           PRODUCTS
+        ========================= */
+
+        .products {
+            display: flex;
+
+            gap: 8px;
+
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            direction: rtl;
+
+            padding-bottom: 5px;
+        }
+
+        .products::-webkit-scrollbar {
+            display: none;
+        }
+
+        .product {
+            flex: 0 0 145px;
+
+            border: 1px solid #e5e5e5;
+
+            border-radius: 3px;
+
+            background: #fff;
+
+            padding: 7px;
+
+            text-align: center;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100px;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 42px;
+
+            background: #f4f4f4;
+
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-size: 10px;
+
+            min-height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price {
+            font: 700 15px Arial, sans-serif;
+
+            margin: 3px 0;
+        }
+
+        .stars {
+            color: #f6ad00;
+
+            letter-spacing: 1px;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+        }
+
+        .buy {
+            width: 100%;
+
+            border: 0;
+            border-radius: 3px;
+
+            background: #ed1c24;
+
+            color: #fff;
+
+            height: 30px;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           BRANDS
+        ========================= */
+
+        .brands {
+            margin-top: 8px;
+
+            background: #f2f2f2;
+
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+
+            padding: 12px 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            gap: 12px;
+
+            direction: ltr;
+
+            overflow: hidden;
+        }
+
+        .brand {
+            font: 900 15px Arial, sans-serif;
+
+            white-space: nowrap;
+        }
+
+        .dewalt {
+            color: #111;
+        }
+
+        .knauf {
+            color: #1596d2;
+        }
+
+        .velloo {
+            color: #e7a800;
+        }
+
+        .ronix {
+            color: #e51e25;
+        }
+
+        .milwaukee {
+            color: #ed1c24;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111;
+
+            color: #ddd;
+
+            padding: 20px 14px 12px;
+
+            font-size: 10px;
+
+            line-height: 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+            direction: rtl;
+        }
+
+        .footer-col h3 {
+            color: #fff;
+
+            font-size: 12px;
+
+            margin: 0 0 7px;
+        }
+
+        .footer-col p {
+            margin: 0;
+
+            color: #bbb;
+        }
+
+        .copyright {
+            border-top: 1px solid #444;
+
+            margin-top: 15px;
+
+            padding-top: 9px;
+
+            text-align: center;
+
+            color: #aaa;
+
+            font-size: 8px;
+        }
+
+        /* =========================
+           SMALL PHONES
+        ========================= */
+
+        @media (max-width: 350px) {
+
+            .topbar {
+                padding: 0 8px;
+            }
+
+            .logo {
+                width: 74px;
+            }
+
+            .header-action {
+                width: 43px;
+            }
+
+            .benefit {
+                gap: 6px;
+                padding-inline: 5px;
+            }
+
+            .benefit-icon {
+                flex-basis: 36px;
+
+                width: 36px;
+                height: 36px;
+            }
+
+            .benefit strong {
+                font-size: 10px;
+            }
+
+            .benefit small {
+                font-size: 8px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="top-black"></div>
+<div class="mobile-page">
 
-    <div class="picture"></div>
+    <!-- ================= HEADER ================= -->
 
-    <div class="white"></div>
+    <header class="topbar">
 
-    <div class="bottom-black"></div>
+        <!-- Replace this with your logo path -->
+        <img
+            class="logo"
+            src="94C8A864-4A91-487B-9707-DAC50E0F9364.png"
+            alt="PH.Tools"
+        >
+
+        <div class="header-actions">
+
+            <!-- Account -->
+
+            <button
+                class="header-action"
+                aria-label="هەژمار"
+            >
+
+                <svg viewBox="0 0 24 24">
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r="4"
+                    ></circle>
+
+                    <path
+                        d="M4.5 21c.7-4 3.1-6 7.5-6s6.8 2 7.5 6"
+                    ></path>
+                </svg>
+
+                <span>
+                    هەژمار
+                </span>
+
+            </button>
+
+
+            <!-- Wishlist -->
+
+            <button
+                class="header-action"
+                aria-label="دڵخوازەکان"
+            >
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M20.8 8.8c0 5.5-8.8 10.5-8.8 10.5S3.2 14.3 3.2 8.8A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 8.8 2.8Z"
+                    ></path>
+
+                </svg>
+
+                <span>
+                    دڵخوازەکان
+                </span>
+
+            </button>
+
+
+            <!-- Cart -->
+
+            <button
+                class="header-action"
+                aria-label="سەبەت"
+            >
+
+                <span class="cart-count">
+                    0
+                </span>
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.5L21 8H7"
+                    ></path>
+
+                    <circle
+                        cx="10"
+                        cy="20"
+                        r="1.2"
+                    ></circle>
+
+                    <circle
+                        cx="18"
+                        cy="20"
+                        r="1.2"
+                    ></circle>
+
+                </svg>
+
+                <span>
+                    سەبەت
+                </span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= NAV ================= -->
+
+    <nav class="mobile-nav">
+
+        <a
+            class="nav-item active"
+            href="#"
+        >
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="m3 11 9-8 9 8"></path>
+
+                <path d="M5 10v10h14V10"></path>
+
+                <path d="M10 20v-6h4v6"></path>
+
+            </svg>
+
+            سەرەتا
+
+        </a>
+
+
+        <a
+            class="nav-item"
+            href="#"
+        >
+            بەرهەمەکان
+        </a>
+
+
+        <a
+            class="nav-item"
+            href="#"
+        >
+            مارکەکان
+        </a>
+
+
+        <a
+            class="nav-item"
+            href="#"
+        >
+            پڕۆژەی خۆت
+        </a>
+
+
+        <a
+            class="nav-item"
+            href="#"
+        >
+            پاکسازی
+        </a>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <!-- Replace with your banner -->
+        <img
+            src="IMG_9500.jpeg"
+            alt="PH.Tools Professional Tools"
+        >
+
+        <button class="hero-button">
+            بە کرینەوەی ئێستا ❯
+        </button>
+
+    </section>
+
+
+    <!-- ================= BENEFITS ================= -->
+
+    <section class="benefits">
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M12 3l2 2 3-.3.8 2.8 2.6 1.5-1.1 2.8 1.1 2.8-2.6 1.5-.8 2.8-3-.3-2 2-2-2-3 .3-.8-2.8-2.6-1.5 1.1-2.8-1.1-2.8L4.2 7.5 5 4.7 8 5z"
+                    ></path>
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="3"
+                    ></circle>
+
+                </svg>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    بەرزترین کوالێتی
+                </strong>
+
+                <small>
+                    بەرهەمی ئەسڵی
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M12 3 20 6v5c0 5.2-3.3 8.3-8 10-4.7-1.7-8-4.8-8-10V6z"
+                    ></path>
+
+                    <path
+                        d="m8.5 12 2.2 2.2 4.8-5"
+                    ></path>
+
+                </svg>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    مارکەی متمانەپێکراو
+                </strong>
+
+                <small>
+                    ناوی و دۆای فرۆشتن
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M3 6h11v11H3z"
+                    ></path>
+
+                    <path
+                        d="M14 10h4l3 3v4h-7z"
+                    ></path>
+
+                    <circle
+                        cx="7"
+                        cy="19"
+                        r="2"
+                    ></circle>
+
+                    <circle
+                        cx="18"
+                        cy="19"
+                        r="2"
+                    ></circle>
+
+                </svg>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    گەیاندنی خێرا
+                </strong>
+
+                <small>
+                    بۆ هەموو شوێنێک
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M12 3v18M5 7h14M7 17h10"
+                    ></path>
+
+                    <path
+                        d="M5 7a4 4 0 0 0 0 8h2M19 7a4 4 0 0 1 0 8h-2"
+                    ></path>
+
+                </svg>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    بو پڕۆفیشناڵەکان
+                </strong>
+
+                <small>
+                    بۆ هەموو پڕۆژەیەک
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <h2>
+                پۆلە سەرەکییەکان
+            </h2>
+
+            <a href="#">
+                بینینی هەموو پۆلەکان ←
+            </a>
+
+        </div>
+
+
+        <div class="categories">
+
+
+            <article class="category">
+
+                <div class="category-image">
+                    🔧
+                </div>
+
+                <strong>
+                    تاسیسات
+                </strong>
+
+                <small>
+                    ئاو و فاضلاب
+                </small>
+
+            </article>
+
+
+            <article class="category">
+
+                <div class="category-image">
+                    🔌
+                </div>
+
+                <strong>
+                    کارەبایی
+                </strong>
+
+                <small>
+                    کابل و ئامێرەکان
+                </small>
+
+            </article>
+
+
+            <article class="category">
+
+                <div class="category-image">
+                    🎨
+                </div>
+
+                <strong>
+                    ڕەنگ و ڕووکاری
+                </strong>
+
+                <small>
+                    بۆ ناوخۆ و دەرەوە
+                </small>
+
+            </article>
+
+
+            <article class="category">
+
+                <div class="category-image">
+                    🛠️
+                </div>
+
+                <strong>
+                    ئامرازە دەستییەکان
+                </strong>
+
+                <small>
+                    بۆ هەموو کارێک
+                </small>
+
+            </article>
+
+
+            <article class="category">
+
+                <div class="category-image">
+                    🔩
+                </div>
+
+                <strong>
+                    ئامرازە کارەباییەکان
+                </strong>
+
+                <small>
+                    پڕۆفیشناڵ و بەهێز
+                </small>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <h2>
+                بەرهەمە نوێیەکان
+            </h2>
+
+            <a href="#">
+                بینینی هەموو بەرهەمەکان ←
+            </a>
+
+        </div>
+
+
+        <div class="products">
+
+
+            <article class="product">
+
+                <div class="product-image">
+                    🔨
+                </div>
+
+                <div class="product-name">
+                    DeWalt 20V XR
+                </div>
+
+                <div class="price">
+                    $249
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <button class="buy">
+                    زیادکردن بۆ سەبەت
+                </button>
+
+            </article>
+
+
+            <article class="product">
+
+                <div class="product-image">
+                    🔧
+                </div>
+
+                <div class="product-name">
+                    Milwaukee M18
+                </div>
+
+                <div class="price">
+                    $279
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <button class="buy">
+                    زیادکردن بۆ سەبەت
+                </button>
+
+            </article>
+
+
+            <article class="product">
+
+                <div class="product-image">
+                    🛠️
+                </div>
+
+                <div class="product-name">
+                    Ronix 750W
+                </div>
+
+                <div class="price">
+                    $89
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <button class="buy">
+                    زیادکردن بۆ سەبەت
+                </button>
+
+            </article>
+
+
+            <article class="product">
+
+                <div class="product-image">
+                    🧰
+                </div>
+
+                <div class="product-name">
+                    Knauf Set
+                </div>
+
+                <div class="price">
+                    $24
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <button class="buy">
+                    زیادکردن بۆ سەبەت
+                </button>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= BRANDS ================= -->
+
+    <div class="brands">
+
+        <span class="brand dewalt">
+            DEWALT
+        </span>
+
+        <span class="brand knauf">
+            KNAUF
+        </span>
+
+        <span class="brand velloo">
+            VELLOO
+        </span>
+
+        <span class="brand ronix">
+            Ronix
+        </span>
+
+        <span class="brand milwaukee">
+            Milwaukee
+        </span>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-col">
+
+                <h3>
+                    PH.Tools
+                </h3>
+
+                <p>
+                    پڕۆفیشناڵی بۆ هەموو پڕۆژەیەک
+                </p>
+
+                <p>
+                    هەموو جۆرێک بەردەستە
+                </p>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>
+                    لینکە خێراکان
+                </h3>
+
+                <p>
+                    سەرەتا
+                </p>
+
+                <p>
+                    بەرهەمەکان
+                </p>
+
+                <p>
+                    مارکەکان
+                </p>
+
+                <p>
+                    پەیوەندیمان پێوە بکە
+                </p>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>
+                    یارمەتی
+                </h3>
+
+                <p>
+                    پرسیارە باوەکان
+                </p>
+
+                <p>
+                    گەڕانەوە و گۆڕین
+                </p>
+
+                <p>
+                    ڕێنمایی کڕین
+                </p>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>
+                    پەیوەندیمان
+                </h3>
+
+                <p>
+                    +964 750 123 4567
+                </p>
+
+                <p>
+                    info@phtools.com
+                </p>
+
+                <p>
+                    سلێمانی، کوردستان
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2024 PH.Tools — هەموو مافەکان پارێزراون.
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    /*
+        Basic cart counter
+    */
+
+    let cartCount = 0;
+
+    const cartCounter =
+        document.querySelector(".cart-count");
+
+    const buyButtons =
+        document.querySelectorAll(".buy");
+
+
+    buyButtons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            cartCount++;
+
+            cartCounter.textContent =
+                cartCount;
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>
