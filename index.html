@@ -19,21 +19,18 @@
 
         body {
             display: grid;
-            grid-template-rows: 2fr 2fr 0.5fr;
+            grid-template-rows: 1.65fr 2fr 0.5fr;
             min-height: 100vh;
         }
 
         .top {
-            background: linear-gradient(
-                to bottom,
-                #808080 0,
-                #808080 17.5%,
-                #000000 17.5%,
-                #000000 100%
-            );
+            background-image: url("IMG_9500.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .white {
+        .middle {
             background: #ffffff;
         }
 
@@ -46,7 +43,7 @@
 <body>
 
     <div class="top"></div>
-    <div class="white"></div>
+    <div class="middle"></div>
     <div class="bottom"></div>
 
 </body>
