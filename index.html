@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P.H.Tools — کەرەستەی بیناسازی</title>
+<meta name="description" content="P.H.Tools — بەرهەم و ئامرازی کوالیتی بۆ هەموو پێداویستیەکانی بیناسازی">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-main">
+    <div class="container header-row">
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+      <a class="logo-wrap" href="#home">
+        <img src="ph-tools-logo.png" alt="P.H.Tools">
+      </a>
+
+      <div class="search-box">
+        <input id="searchInput" type="search" placeholder="گەڕان بەدوای بەرهەم..." aria-label="گەڕان">
+        <button id="searchButton">⌕</button>
+      </div>
+
+      <div class="quick-actions">
+        <button class="quick-action" title="هەژمار"><span>♙</span><small>هەژمار</small></button>
+        <button class="quick-action" title="دڵخوازەکان"><span>♡</span><small>دڵخواز</small></button>
+        <button class="cart-action" id="cartOpen"><span>🛒</span><small>سەبەتە</small><b id="cartCount">0</b></button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar" id="navBar">
+    <div class="container nav-row">
+      <a class="nav-link active" href="#home">⌂ <span>سەرەتا</span></a>
+      <a class="nav-link" href="#products">بەرهەمەکان</a>
+      <a class="nav-link" href="#categories">مارکەکان</a>
+      <a class="nav-link" href="#about">پڕۆژەی خۆت</a>
+      <a class="nav-link" href="#products">ئامرازە پیشەییەکان</a>
+      <a class="nav-link" href="#contact">پەیوەندیمان پێوە بکە</a>
+    </div>
+  </nav>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <img src="hero-3x5.png" alt="P.H.Tools construction supply" class="hero-img">
+    <div class="hero-shade"></div>
+    <div class="hero-content">
+      <div class="hero-mini">P.H.TOOLS • CONSTRUCTION SUPPLY</div>
+      <h1>بۆ هەموو پێداویستیەکانی بیناسازی</h1>
+      <p>کەرەستە و ئامرازی متمانەپێکراو بۆ هەموو پڕۆژەکانت.</p>
+      <a href="#products" class="hero-btn">لە کۆگا ببینە <span>←</span></a>
+    </div>
+  </section>
+
+  <section class="trust-strip">
+    <div class="container trust-grid">
+      <div><i>✦</i><div><strong>باشترین کوالیتی</strong><small>بەرهەمی ئەسڵی</small></div></div>
+      <div><i>◈</i><div><strong>مارکەی متمانەپێکراو</strong><small>ئامانی و دوای فرۆشتن</small></div></div>
+      <div><i>▣</i><div><strong>گەیاندنی خێرا</strong><small>بۆ شارەکان و پڕۆژەکان</small></div></div>
+      <div><i>⬡</i><div><strong>بۆ پیشەسازەکان</strong><small>بۆ هەموو پڕۆژەیەک</small></div></div>
+    </div>
+  </section>
+
+  <section class="section categories" id="categories">
+    <div class="container">
+      <div class="section-head">
+        <h2>پۆلە سەرەکییەکان</h2>
+        <button class="red-link" data-category="هەموو">بینینی هەموو پۆلەکان ←</button>
+      </div>
+      <div class="category-grid">
+        <button class="category-card" data-category="پاراستن">
+          <img src="category-safety.jpg" alt="">
+          <span class="category-overlay"></span>
+          <div><b>ئامرازەکانی سەلامەتی</b><small>بەکڵاو و پاراستن</small></div>
+        </button>
+        <button class="category-card" data-category="ئامرازی کارەبا">
+          <img src="category-tools.jpg" alt="">
+          <span class="category-overlay"></span>
+          <div><b>ئامرازە کارەباییەکان</b><small>پیشەیی و خێرا</small></div>
+        </button>
+        <button class="category-card" data-category="ئامرازی دەستی">
+          <img src="category-hand.jpg" alt="">
+          <span class="category-overlay"></span>
+          <div><b>ئامرازە دەستییەکان</b><small>بۆ هەموو کارێک</small></div>
+        </button>
+        <button class="category-card" data-category="کەرەستەی پیشەسازی">
+          <img src="category-professional.jpg" alt="">
+          <span class="category-overlay"></span>
+          <div><b>کەرەستەی پیشەسازی</b><small>بۆ پڕۆژە گەورەکان</small></div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section products" id="products">
+    <div class="container">
+      <div class="section-head">
+        <h2>بەرهەمە نوێیەکان</h2>
+        <button class="red-link" id="showAll">پێشنیاری هەموو بەرهەمەکان ←</button>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="no-results" id="noResults" hidden>
+        <strong>هیچ بەرهەمێک نەدۆزرایەوە</strong>
+        <span>وشەیەکی تر تاقی بکەرەوە.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="brands">
+    <div class="container brands-row">
+      <span>مارکەکانی ئێمە</span>
+      <b class="dewalt">DEWALT</b>
+      <b class="knauf">KNAUF</b>
+      <b class="velloo">VELLOO</b>
+      <b class="ronix">Ronix</b>
+      <b class="milwaukee">Milwaukee</b>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div>
+        <span class="eyebrow">P.H.Tools</span>
+        <h2>بەرهەمە ناوازەکان، بۆ کاری ناوازە.</h2>
+        <p>ئێمە ئامراز و کەرەستەی کوالیتی کۆدەکەینەوە بۆ ئەوەی کاری بیناسازی و چاککردنەوەکانت بە ئاسانی و دڵنیایی بڕۆنە پێشەوە.</p>
+      </div>
+      <div class="about-stat"><strong>100%</strong><span>هەڵبژاردەی کوالیتی</span></div>
+      <div class="about-stat"><strong>24/7</strong><span>پشتیوانی داواکاری</span></div>
+    </div>
+  </section>
+
+  <section class="contact section" id="contact">
+    <div class="container contact-grid">
+      <div>
+        <span class="eyebrow">پەیوەندی</span>
+        <h2>بۆ پڕۆژەکەت پێویستت بە چییە؟</h2>
+        <p>لیستی بەرهەمەکانت بنێرە و بۆ نرخ و بەردەستبوون پەیوەندیمان پێوە بکە.</p>
+      </div>
+      <div class="contact-list">
+        <a href="tel:+9647XXXXXXXXX">📞 <span>07XX XXX XXXX</span></a>
+        <a href="mailto:info@phtools.example">✉ <span>info@phtools.example</span></a>
+        <div>📍 <span>هەولێر، کوردستان، عێراق</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="ph-tools-logo.png" alt="P.H.Tools">
+      <p>پارتنەری متمانەپێکراوی کەرەستەی بیناسازی.</p>
+    </div>
+    <div><h4>لینکە خێراکان</h4><a href="#home">سەرەتا</a><a href="#products">بەرهەمەکان</a><a href="#categories">مارکەکان</a><a href="#contact">پەیوەندی</a></div>
+    <div><h4>یارمەتی</h4><a href="#products">داواکاری</a><a href="#about">دەربارەی ئێمە</a><a href="#contact">پشتیوانی</a></div>
+    <div><h4>پەیوەندی</h4><p>+964 750 123 4567</p><p>info@phtools.example</p><p>هەولێر، کوردستان</p><div class="socials">f &nbsp; ◎ &nbsp; ♪ &nbsp; ▶</div></div>
+  </div>
+  <div class="footer-bottom"><div class="container">© 2026 P.H.Tools — هەموو مافەکان پارێزراون.</div></div>
+</footer>
+
+<aside class="cart" id="cart">
+  <div class="cart-head"><h2>سەبەتە</h2><button id="cartClose">×</button></div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot"><div><span>کۆی گشتی</span><strong id="cartTotal">0 د.ع</strong></div><button id="checkout" class="checkout">تەواوکردنی داواکاری</button></div>
+</aside>
+<div class="backdrop" id="backdrop"></div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
